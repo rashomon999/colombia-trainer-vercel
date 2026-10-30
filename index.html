@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Colombia Trainer — Historia e himnos de Colombia</title>
+<meta name="description" content="App gratuita para aprender la historia de Colombia, los presidentes y 53 himnos llenando huecos. 278 preguntas, sin anuncios y sin internet. Ideal para el colegio y las Saber 11.">
+<meta name="theme-color" content="#0c162c">
+<link rel="icon" href="/img/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="/img/icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Colombia Trainer — Historia e himnos de Colombia">
+<meta property="og:description" content="278 preguntas de historia, los 40 gobiernos desde 1886 y 53 himnos para practicar. Gratis en Google Play.">
+<meta property="og:image" content="/img/og.png">
+<meta property="og:locale" content="es_CO">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink-950:#0a1224;
+  --ink-900:#0c162c;
+  --navy:#2d4570;
+  --yellow:#fcd116;
+  --blue:#2f6fdf;
+  --red:#e0243c;
+  --line:rgba(255,255,255,.10);
+  --text:#f7f5ef;
+  --muted:#a3b1cc;
+  --display:'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --serif:Georgia, 'Times New Roman', serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);background:var(--ink-950);color:var(--text);
+  line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+.flag{position:fixed;top:0;left:0;right:0;height:6px;z-index:10;
+  background:linear-gradient(180deg,var(--yellow) 0 50%,#0038a8 50% 75%,#ce1126 75% 100%)}
+.bg{position:fixed;inset:0;z-index:-3;
+  background:radial-gradient(115% 75% at 50% -8%, #3b5b92 0%, #1a2b4f 45%, #0a1224 80%);}
+.bg::after{content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(42% 28% at 84% 16%, rgba(252,209,22,.13), transparent 70%),
+    radial-gradient(48% 32% at 12% 36%, rgba(47,111,223,.20), transparent 70%);}
+.mark{
+  position:fixed;top:4vh;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-weight:700;font-size:min(42vw,420px);
+  line-height:1;color:#fff;opacity:.03;z-index:-2;pointer-events:none;user-select:none;letter-spacing:-.04em;
+}
+.grain{position:fixed;inset:0;z-index:-1;opacity:.05;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* ---------- hero ---------- */
+header.hero{padding:clamp(56px,12vw,96px) 0 clamp(28px,6vw,44px);text-align:center;position:relative}
+.icon-wrap{position:relative;display:inline-block;margin-bottom:26px}
+.icon-wrap::before{content:"";position:absolute;inset:-38%;border-radius:50%;
+  background:radial-gradient(circle, rgba(252,209,22,.30), transparent 68%);filter:blur(16px)}
+.app-icon{position:relative;width:clamp(94px,23vw,118px);height:auto;display:block;
+  border-radius:24%;box-shadow:0 20px 44px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.12)}
+.eyebrow{font-size:11.5px;letter-spacing:.20em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin-bottom:14px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(36px,9.5vw,64px);
+  line-height:1.02;letter-spacing:-.03em;margin-bottom:16px}
+h1 .grad{background:linear-gradient(100deg,#fde68a,#fcd116 45%,#f59e0b);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{font-size:clamp(16px,4.3vw,20px);color:#d5deef;max-width:34ch;margin:0 auto 24px}
+
+.stats{display:flex;justify-content:center;margin:0 auto 28px;max-width:430px;
+  border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.045);backdrop-filter:blur(8px);overflow:hidden}
+.stat{flex:1;padding:13px 8px;text-align:center}
+.stat + .stat{border-left:1px solid var(--line)}
+.stat b{display:block;font-family:var(--display);font-size:clamp(20px,5.4vw,25px);font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.2}
+.stat span{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* ---------- CTA ---------- */
+.cta{display:inline-flex;align-items:center;gap:13px;
+  background:linear-gradient(150deg,#fde68a,#fcd116 50%,#eab308);color:#14203a;text-decoration:none;
+  padding:15px 30px 15px 24px;border-radius:16px;font-weight:700;
+  font-size:clamp(15.5px,4.2vw,17px);letter-spacing:-.01em;
+  box-shadow:0 14px 36px rgba(252,209,22,.28), inset 0 1px 0 rgba(255,255,255,.5);
+  transition:transform .18s ease, box-shadow .18s ease}
+.cta:hover{transform:translateY(-2px);box-shadow:0 22px 48px rgba(252,209,22,.38), inset 0 1px 0 rgba(255,255,255,.5)}
+.cta:active{transform:translateY(0) scale(.985)}
+.cta svg{flex:0 0 auto}
+.cta .lines{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+.cta .small{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:.7}
+.cta .big{font-size:1.06em;font-weight:700}
+.cta-note{margin-top:15px;font-size:13px;color:var(--muted)}
+.cta-note b{color:#e6ecf7;font-weight:600}
+.ios-note{display:none;margin:12px auto 0;max-width:34ch;font-size:13px;color:#fde68a;
+  border:1px solid rgba(252,209,22,.3);background:rgba(252,209,22,.08);border-radius:12px;padding:9px 14px}
+.is-ios .ios-note{display:block}
+
+/* ---------- verse sample ---------- */
+.verse{text-align:center;padding:clamp(26px,7vw,48px) 0}
+.verse .box{display:inline-block;text-align:left;
+  font-family:var(--serif);font-size:clamp(22px,6.2vw,34px);line-height:1.5;color:#f4f1e8;
+  border:1px solid var(--line);border-radius:20px;padding:clamp(18px,5vw,28px) clamp(22px,6vw,42px);
+  background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
+.verse .gap{display:inline-block;padding:0 .3em;margin:0 .05em;
+  border-bottom:2px solid var(--yellow);color:var(--yellow);font-style:italic}
+.verse figcaption{margin-top:14px;font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* ---------- features ---------- */
+.features{display:grid;gap:14px;padding:clamp(20px,5vw,40px) 0;grid-template-columns:1fr}
+@media(min-width:720px){.features{grid-template-columns:repeat(3,1fr);gap:18px}}
+.card{border:1px solid var(--line);border-radius:18px;padding:24px 22px;
+  background:linear-gradient(170deg, rgba(255,255,255,.075), rgba(255,255,255,.022));backdrop-filter:blur(8px)}
+.card .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;margin-bottom:15px;
+  background:rgba(252,209,22,.12);border:1px solid rgba(252,209,22,.32)}
+.card:nth-child(2) .ico{background:rgba(47,111,223,.16);border-color:rgba(47,111,223,.4)}
+.card:nth-child(3) .ico{background:rgba(224,36,60,.14);border-color:rgba(224,36,60,.38)}
+.card h3{font-family:var(--display);font-weight:600;font-size:19px;margin-bottom:7px;letter-spacing:-.015em}
+.card p{font-size:14.5px;color:var(--muted);line-height:1.55}
+
+/* ---------- eras ---------- */
+.topics{padding:clamp(20px,5vw,36px) 0 clamp(26px,6vw,44px);text-align:center}
+.topics h2{font-family:var(--display);font-weight:600;font-size:clamp(22px,6vw,30px);letter-spacing:-.02em;margin-bottom:18px}
+.tlist{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;max-width:900px;margin:0 auto}
+.topic{font-size:13px;font-weight:500;color:#e6ecf7;border:1px solid var(--line);
+  background:rgba(255,255,255,.05);padding:8px 15px;border-radius:999px}
+.topic b{color:var(--yellow);font-weight:600;font-variant-numeric:tabular-nums;margin-left:4px}
+.pledge{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;font-size:13px;color:var(--muted)}
+.pledge span{display:inline-flex;align-items:center;gap:7px}
+.pledge span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--yellow)}
+
+/* ---------- screenshots ---------- */
+.shots-head{text-align:center;margin-bottom:24px}
+.shots-head h2{font-family:var(--display);font-weight:600;font-size:clamp(24px,6.5vw,34px);letter-spacing:-.02em;margin-bottom:8px}
+.shots-head p{color:var(--muted);font-size:15px}
+.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:6px 22px 26px;margin:0 -22px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail figure{flex:0 0 auto;scroll-snap-align:center;width:min(220px,58vw)}
+@media(min-width:960px){.shots-head p{display:none}.rail{overflow:visible;margin:0;padding:6px 0 26px}.rail figure{flex:1 1 0;width:auto}}
+.rail img{width:100%;height:auto;display:block;border-radius:20px;
+  border:1px solid rgba(255,255,255,.14);box-shadow:0 20px 46px rgba(0,0,0,.55);background:#2d4570}
+.rail figcaption{margin-top:11px;font-size:12.5px;color:var(--muted);text-align:center}
+
+/* ---------- closing ---------- */
+.closing{text-align:center;padding:clamp(28px,7vw,56px) 0 clamp(36px,8vw,64px)}
+.closing h2{font-family:var(--display);font-weight:700;font-size:clamp(25px,6.8vw,38px);letter-spacing:-.025em;margin-bottom:12px}
+.closing p{color:var(--muted);max-width:38ch;margin:0 auto 26px;font-size:15.5px}
+
+footer{border-top:1px solid var(--line);padding:26px 0 42px;text-align:center;font-size:13px;color:#7d8bab}
+footer a{color:inherit}
+.divider{width:54px;height:3px;border-radius:2px;margin:0 auto;
+  background:linear-gradient(90deg,var(--yellow) 0 50%,#2f6fdf 50% 75%,var(--red) 75%)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.cta{transition:none}}
+</style>
+</head>
+<body>
+<div class="flag"></div><div class="bg"></div><div class="mark">1810</div><div class="grain"></div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="icon-wrap">
+      <img class="app-icon" src="/img/icon.png" alt="Colombia Trainer" width="512" height="512">
+    </div>
+    <p class="eyebrow">Aplicación para Android</p>
+    <h1>Colombia <span class="grad">Trainer</span></h1>
+    <p class="tagline">Apréndete de verdad la historia y los himnos de Colombia: no leyéndolos, sino completándolos.</p>
+
+    <div class="stats">
+      <div class="stat"><b>278</b><span>Preguntas</span></div>
+      <div class="stat"><b>53</b><span>Himnos</span></div>
+      <div class="stat"><b>12</b><span>Épocas</span></div>
+    </div>
+
+    <a class="cta" href="#" rel="noopener">
+      <svg width="26" height="28" viewBox="0 0 88 100" aria-hidden="true">
+        <path d="M0 0 L57 50 L0 50 Z" fill="#14203a" opacity=".95"/>
+        <path d="M0 100 L57 50 L0 50 Z" fill="#14203a" opacity=".75"/>
+        <path d="M0 0 L88 50 L57 50 Z" fill="#14203a" opacity=".55"/>
+        <path d="M0 100 L88 50 L57 50 Z" fill="#14203a" opacity=".38"/>
+      </svg>
+      <span class="lines">
+        <span class="small">Disponible en</span>
+        <span class="big">Google Play</span>
+      </span>
+    </a>
+    <p class="cta-note">O búscala como <b>“Colombia Trainer”</b> en la Play Store.</p>
+    <p class="ios-note">Por ahora la app es solo para Android. Ábrela desde un celular Android para instalarla.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <figure class="verse reveal">
+    <div class="box">
+      ¡Oh gloria <span class="gap">inmarcesible</span>!<br>
+      ¡Oh júbilo <span class="gap">inmortal</span>!
+    </div>
+    <figcaption>Himno Nacional · Coro · modo Palabras</figcaption>
+  </figure>
+
+  <section class="features">
+    <div class="card reveal">
+      <div class="ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fcd116" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <h3>Historia, época por época</h3>
+      <p>Doce épocas con su cuestionario, de los pueblos originarios a hoy. Cada una lleva su avance y se pone verde cuando la terminas.</p>
+    </div>
+    <div class="card reveal">
+      <div class="ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6ea0ff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>
+      </div>
+      <h3>Los presidentes, de 1886 a hoy</h3>
+      <p>Los 40 gobiernos en dos partes. Llena la tabla completa o responde pregunta por pregunta, con distractores de la misma época.</p>
+    </div>
+    <div class="card reveal">
+      <div class="ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff6b7d" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+      </div>
+      <h3>53 himnos, 321 estrofas</h3>
+      <p>El Nacional completo, los 32 departamentos y 20 ciudades. Cada estrofa de tres formas: completar, palabras clave u opción múltiple.</p>
+    </div>
+  </section>
+
+  <section class="topics reveal">
+    <h2>Las doce épocas</h2>
+    <div class="tlist">
+      <span class="topic">Pueblos originarios<b>antes de 1499</b></span>
+      <span class="topic">La Conquista<b>1499–1550</b></span>
+      <span class="topic">La Colonia<b>1550–1810</b></span>
+      <span class="topic">La Independencia<b>1810–1819</b></span>
+      <span class="topic">La Gran Colombia<b>1819–1831</b></span>
+      <span class="topic">Guerras civiles y constituciones<b>1831–1886</b></span>
+      <span class="topic">Mil Días y Panamá<b>1886–1910</b></span>
+      <span class="topic">Hegemonía y República Liberal<b>1910–1946</b></span>
+      <span class="topic">La Violencia<b>1946–1958</b></span>
+      <span class="topic">El Frente Nacional<b>1958–1974</b></span>
+      <span class="topic">Conflicto y Constitución de 1991<b>1974–1998</b></span>
+      <span class="topic">Colombia de hoy<b>1998–2026</b></span>
+    </div>
+    <div class="pledge">
+      <span>Sin anuncios</span>
+      <span>Sin internet</span>
+      <span>Sin cuenta</span>
+      <span>Sin permisos</span>
+    </div>
+  </section>
+
+  <section class="shots">
+    <div class="shots-head reveal">
+      <h2>Así se ve por dentro</h2>
+      <p>Desliza para verlo →</p>
+    </div>
+    <div class="rail">
+      <figure><img src="/img/menu.jpg" alt="Menú con Historia, Himnos y cuestionarios" width="540" height="960" loading="lazy"><figcaption>El menú principal</figcaption></figure>
+      <figure><img src="/img/historia.jpg" alt="Lista de épocas con su avance" width="540" height="960" loading="lazy"><figcaption>Las épocas y su avance</figcaption></figure>
+      <figure><img src="/img/pregunta.jpg" alt="Pregunta de opción múltiple sobre la Independencia" width="540" height="960" loading="lazy"><figcaption>Opción múltiple o escrita</figcaption></figure>
+      <figure><img src="/img/presidentes.jpg" alt="Tabla de presidentes calificada" width="540" height="960" loading="lazy"><figcaption>La tabla de presidentes</figcaption></figure>
+      <figure><img src="/img/himnos.jpg" alt="Himnos por departamento" width="540" height="960" loading="lazy"><figcaption>Himnos por departamento</figcaption></figure>
+      <figure><img src="/img/himno.jpg" alt="Completar una estrofa del Himno Nacional" width="540" height="960" loading="lazy"><figcaption>Completa cada estrofa</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="closing reveal">
+    <h2>Más allá de la primera estrofa</h2>
+    <p>Gratis, sin anuncios y sin internet. Para el colegio, las Saber 11 o un concurso.</p>
+    <a class="cta" href="#" rel="noopener">
+      <svg width="26" height="28" viewBox="0 0 88 100" aria-hidden="true">
+        <path d="M0 0 L57 50 L0 50 Z" fill="#14203a" opacity=".95"/>
+        <path d="M0 100 L57 50 L0 50 Z" fill="#14203a" opacity=".75"/>
+        <path d="M0 0 L88 50 L57 50 Z" fill="#14203a" opacity=".55"/>
+        <path d="M0 100 L88 50 L57 50 Z" fill="#14203a" opacity=".38"/>
+      </svg>
+      <span class="lines">
+        <span class="small">Disponible en</span>
+        <span class="big">Google Play</span>
+      </span>
+    </a>
+  </section>
+
+  <footer><p>Colombia Trainer · Historia e himnos de Colombia · <a href="https://sites.google.com/view/colombiatrainer/p%C3%A1gina-principal" rel="noopener">Privacidad</a></p></footer>
+
+</div>
+
+<script>
+(function(){
+  /* ====== CONFIGURACIÓN — cambia solo estas líneas ====== */
+  var PLAY_URL = "https://play.google.com/store/apps/details?id=com.colombia.trainer";
+  var AUTO_REDIRECT = false;      // true = salta solo a Google Play
+  var AUTO_REDIRECT_DELAY = 1800; // ms
+  /* ===================================================== */
+
+  var links = document.querySelectorAll('.cta');
+  for (var l=0;l<links.length;l++){ links[l].href = PLAY_URL; }
+
+  /* En iPhone/iPad la app no se puede instalar: se muestra un aviso */
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (isIOS) document.documentElement.classList.add('is-ios');
+
+  if (AUTO_REDIRECT && !isIOS){
+    setTimeout(function(){ window.location.href = PLAY_URL; }, AUTO_REDIRECT_DELAY);
+  }
+
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
