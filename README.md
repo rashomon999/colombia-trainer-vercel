@@ -20,3 +20,6 @@ reemplaza los archivos con el mismo nombre.
 ## Redirección automática
 `AUTO_REDIRECT = true` hace que la página salte sola a Google Play tras `AUTO_REDIRECT_DELAY` ms
 (nunca en iPhone).
+
+
+Link: https://colombia-trainer.vercel.app
